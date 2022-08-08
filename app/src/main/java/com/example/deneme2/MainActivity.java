@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         seker.setTypeface(tf1);
     }
 
+
     public void sec() {
         kahve.setOnClickListener(new View.OnClickListener() {
             @Override
