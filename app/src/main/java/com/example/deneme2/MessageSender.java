@@ -20,38 +20,16 @@ public class MessageSender extends AsyncTask<String,Void,Void> {
         String message =voids[0];
         try
         {
-            // create new socket and connect to the server
-            this.socket = new Socket( "192.168.1.57" , 8080 );
-        }
-        catch( IOException e )
-        {
-            System.out.println( "failed to create socket" );
-            e.printStackTrace();
-        }
-
-        System.out.println( "connected" );
-
-        try
-        {
-            this.dataOutputStream = new DataOutputStream( new BufferedOutputStream( this.socket.getOutputStream() ) );
+            // socket oluşturup servera bağlanma
+            this.socket = new Socket( "192.168.1.38" , 8080 );//serverın ip sini ve serverın çalıştığı port numarasını sockete gir
+            this.dataOutputStream = new DataOutputStream( new BufferedOutputStream( this.socket.getOutputStream() ) );//sockete yazma işlemi yapabilmek için dataoutput stream tanımla
+            this.dataOutputStream.writeUTF( message);//writeUTF ile stringi yazma işlemi (send butonuyla alınan mesaj)
+            this.dataOutputStream.flush();//mesajı gönder
         }
         catch ( IOException e )
         {
-            System.out.println( "failed to create streams" );
             e.printStackTrace();
         }
-
-        try
-        {
-            this.dataOutputStream.writeUTF( message);
-            this.dataOutputStream.flush();
-        }
-        catch ( IOException e )
-        {
-            System.out.println( "failed to send" );
-            e.printStackTrace();
-        }
-
         return null;
     }
 }
